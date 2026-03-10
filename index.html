@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>New York Nights 2D</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    canvas {
+      border: 2px solid #fff;
+      background-color: #111;
+      display: block;
+      margin: 20px auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>New York Nights 2D</h1>
+  <p>Explore Times Square, Central Park, trânsito, ônibus e aeroportos!</p>
+
+  <!-- Canvas para o jogo -->
+  <canvas id="gameCanvas" width="800" height="600"></canvas>
+
+  <script>
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
+
+    // Player
+    let player = { x: 400, y: 300, size: 20, color: "blue" };
+
+    // NPCs
+    let npcs = [
+      { x: 200, y: 200, size: 15, color: "gray" },
+      { x: 500, y: 400, size: 15, color: "gray" }
+    ];
+
+    // Ônibus
+    let buses = [
+      { x: 100, y: 100, size: 40, color: "cyan", dx: 2, dy: 0 }
+    ];
+
+    // Aeroportos
+    let airports = [
+      { x: 50, y: 50, w: 100, h: 80, color: "lightblue", name: "JFK" },
+      { x: 600, y: 100, w: 100, h: 80, color: "lightblue", name: "LaGuardia" }
+    ];
+
+    // Movimento do player
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") player.x -= 5;
+      if (e.key === "ArrowRight") player.x += 5;
+      if (e.key === "ArrowUp") player.y -= 5;
+      if (e.key === "ArrowDown") player.y += 5;
+    });
+
+    function draw() {
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+
+      // Central Park
+      ctx.fillStyle = "green";
+      ctx.fillRect(150,100,500,300);
+
+      // Times Square
+      ctx.fillStyle = "yellow";
+      ctx.fillRect(380,260,80,80);
+
+      // Player
+      ctx.fillStyle = player.color;
+      ctx.fillRect(player.x, player.y, player.size, player.size);
+
+      // NPCs
+      npcs.forEach(npc => {
+        ctx.fillStyle = npc.color;
+        ctx.fillRect(npc.x, npc.y, npc.size, npc.size);
+      });
+
+      // Ônibus
+      buses.forEach(bus => {
+        ctx.fillStyle = bus.color;
+        ctx.fillRect(bus.x, bus.y, bus.size, 20);
+        bus.x += bus.dx;
+        bus.y += bus.dy;
+        if (bus.x > canvas.width) bus.x = -bus.size;
+      });
+
+      // Aeroportos
+      airports.forEach(ap => {
+        ctx.fillStyle = ap.color;
+        ctx.fillRect(ap.x, ap.y, ap.w, ap.h);
+        ctx.fillStyle = "white";
+        ctx.fillText(ap.name, ap.x+10, ap.y+40);
+      });
+
+      requestAnimationFrame(draw);
+    }
+
+    draw();
+  </script>
+</body>
+</html>
