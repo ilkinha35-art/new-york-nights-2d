@@ -1,0 +1,24 @@
+{
+  "map_name": "Manhattan",
+  "width": 800,
+  "height": 600,
+  "streets": [
+    { "name": "Broadway", "path": [[100, 50], [700, 550]] },
+    { "name": "5th Avenue", "path": [[400, 50], [400, 550]] },
+    { "name": "42nd Street", "path": [[50, 300], [750, 300]] }
+  ],
+  "points_of_interest": [
+    {
+      "name": "Times Square",
+      "position": [400, 280],
+      "size": [80, 80],
+      "color": [255, 255, 0]
+    },
+    {
+      "name": "Central Park",
+      "position": [150, 100],
+      "size": [500, 300],
+      "color": [34, 139, 34]
+    }
+  ]
+}
