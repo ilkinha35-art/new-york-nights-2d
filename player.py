@@ -23,3 +23,12 @@ class Player:
 
     def draw(self, screen):
         screen.blit(self.image, self.rect.topleft)
+
+    def check_interaction(self, points_of_interest):
+        """Verifica se o player colidiu com algum ponto de interesse"""
+        for poi in points_of_interest:
+            rect = pygame.Rect(poi["position"][0], poi["position"][1],
+                               poi["size"][0], poi["size"][1])
+            if self.rect.colliderect(rect):
+                return poi["name"]
+        return None
